@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Offline Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .converter {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .converter h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="converter">
+    <h2>Currency to INR Converter</h2>
+
+    <label for="currency">Select Currency:</label>
+    <select id="currency">
+      <option value="SGD">SGD - Singapore Dollar</option>
+      <option value="MYR">MYR - Malaysian Ringgit</option>
+      <option value="THB">THB - Thai Baht</option>
+    </select>
+
+    <label for="amount">Enter Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount" />
+
+    <button onclick="convertToINR()">Convert to INR</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    // Hardcoded exchange rates to INR (as of a recent date)
+    const exchangeRates = {
+      SGD: 60.5,  // 1 SGD = 60.5 INR
+      MYR: 17.6,  // 1 MYR = 17.6 INR
+      THB: 2.3    // 1 THB = 2.3 INR
+    };
+
+    function convertToINR() {
+      const currency = document.getElementById('currency').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(amount) || amount <= 0) {
+        resultDiv.textContent = "Please enter a valid amount.";
+        return;
+      }
+
+      const rate = exchangeRates[currency];
+      const converted = amount * rate;
+
+      resultDiv.textContent = `${amount} ${currency} = ₹${converted.toFixed(2)} INR`;
+    }
+  </script>
+
+</body>
+</html>
+
+    
